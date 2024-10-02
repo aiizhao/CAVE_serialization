@@ -1,7 +1,5 @@
 def infer_prop_type(prop_entry):
-    if "type" in prop_entry:
-        return prop_entry["type"]
-    elif "value" not in prop_entry:
+    if "value" not in prop_entry:
         return "head"
     elif isinstance(prop_entry["value"], str):
         return "text"
@@ -12,5 +10,5 @@ def infer_prop_type(prop_entry):
     return "num"
 
 
-def pixel_value_to_num(string):
-    return float(string[:-2])
+def pixel_value_to_num(pixel_str):
+    return float(pixel_str[:-2])

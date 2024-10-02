@@ -38,23 +38,17 @@ class ArcsNodesGeosSerializer(TopLevelKeySerializer):
                 for option in size_by_options
             }
 
-    def include_data_props_name(self):
+    def include_data_props_name_and_type(self):
         for data_entry in self.json["data"].values():
             if "props" in data_entry:
                 for prop_key, prop_entry in data_entry["props"].items():
-                    prop_entry["name"] = prop_key
-
-    def include_data_props_type(self):
-        for data_entry in self.json["data"].values():
-            if "props" in data_entry:
-                for prop_entry in data_entry["props"].values():
-                    prop_entry["type"] = infer_prop_type(prop_entry)
+                    prop_entry.setdefault("name", prop_key)
+                    prop_entry.setdefault("type", infer_prop_type(prop_entry))
 
     def perform(self):
         self.convert_color_by_options()
         self.convert_size_by_options()
-        self.include_data_props_name()
-        self.include_data_props_type()
+        self.include_data_props_name_and_type()
 
 
 class Arcs(ArcsNodesGeosSerializer):
@@ -68,12 +62,12 @@ class Nodes(ArcsNodesGeosSerializer):
 class Geos(ArcsNodesGeosSerializer):
     def perform(self):
         self.convert_color_by_options()
-        self.include_data_props_name()
-        self.include_data_props_type()
+        self.include_data_props_name_and_type()
 
 
 class Kpis(TopLevelKeySerializer):
     def perform(self):
+        # explicitly specify headers as 'head' type
         for kpi_entry in self.json["data"].values():
             if "value" not in kpi_entry:
                 kpi_entry["type"] = "head"
@@ -81,6 +75,7 @@ class Kpis(TopLevelKeySerializer):
 
 class Panes(TopLevelKeySerializer):
     def perform(self):
+        # ensure all panes are named
         for pane_key, pane_entry in self.json["data"].items():
             if "name" not in pane_entry:
                 pane_entry["name"] = pane_key + " Pane"
@@ -88,6 +83,7 @@ class Panes(TopLevelKeySerializer):
 
 class Settings(TopLevelKeySerializer):
     def perform(self):
+        # 1.6.3 uses 'iconUrl' instead of 'IconUrl'
         icon_url = self.json["data"].pop("IconUrl")
         self.json["data"]["iconUrl"] = icon_url
 
