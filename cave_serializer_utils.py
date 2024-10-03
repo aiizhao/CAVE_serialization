@@ -8,7 +8,3 @@ def infer_prop_type(prop_entry):
     elif isinstance(prop_entry["value"], dict):
         return "selector"
     return "num"
-
-
-def pixel_value_to_num(pixel_str):
-    return float(pixel_str[:-2])

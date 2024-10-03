@@ -17,44 +17,57 @@ class TopLevelKeySerializer:
 
 
 class ArcsNodesGeosSerializer(TopLevelKeySerializer):
-    def convert_color_by_options(self):
-        for type_entry in self.json["types"].values():
-            color_by_options = type_entry.pop("colorByOptions")
-            start_gradient_color = type_entry.pop("startGradientColor")
-            end_gradient_color = type_entry.pop("endGradientColor")
-            type_entry["colorByOptions"] = {
-                option: {
-                    "min": 0,
-                    "max": 0,  # TODO
-                    "startGradientColor": start_gradient_color,
-                    "endGradientColor": end_gradient_color,
-                }
-                for option in color_by_options
-            }
-
-    def convert_size_by_options(self):
-        for type_entry in self.json["types"].values():
-            size_by_options = type_entry.pop("sizeByOptions")
-            start_size = type_entry.pop("startSize")
-            end_size = type_entry.pop("endSize")
-            type_entry["sizeByOptions"] = {
-                option: {
-                    "min": pixel_value_to_num(start_size),
-                    "max": pixel_value_to_num(end_size),
-                }
-                for option in size_by_options
-            }
-
     def include_data_props_name_and_type(self):
         for data_entry in self.json["data"].values():
             for prop_key, prop_entry in data_entry["props"].items():
                 prop_entry.setdefault("name", prop_key)
                 prop_entry.setdefault("type", infer_prop_type(prop_entry))
 
+    def get_data_props_min_and_max(self):
+        self.props_min_values = dict()
+        self.props_max_values = dict()
+        for data_entry in self.json["data"].values():
+            for prop_key, prop_entry in data_entry["props"].items():
+                self.props_min_values[prop_key] = min(
+                    prop_entry["value"],
+                    self.props_min_values.get(prop_key, float("inf")),
+                )
+                self.props_max_values[prop_key] = max(
+                    prop_entry["value"],
+                    self.props_max_values.get(prop_key, float("-inf")),
+                )
+
+    def convert_color_by_options(self):
+        for type_entry in self.json["types"].values():
+            color_by_options = type_entry.pop("colorByOptions")
+            start_gradient_color = type_entry.pop("startGradientColor")
+            end_gradient_color = type_entry.pop("endGradientColor")
+            type_entry["colorByOptions"] = {
+                prop: {
+                    "min": self.props_min_values[prop],
+                    "max": self.props_max_values[prop],
+                    "startGradientColor": start_gradient_color,
+                    "endGradientColor": end_gradient_color,
+                }
+                for prop in color_by_options
+            }
+
+    def convert_size_by_options(self):
+        for type_entry in self.json["types"].values():
+            size_by_options = type_entry.pop("sizeByOptions")
+            type_entry["sizeByOptions"] = {
+                prop: {
+                    "min": self.props_min_values[prop],
+                    "max": self.props_max_values[prop],
+                }
+                for prop in size_by_options
+            }
+
     def perform(self):
+        self.include_data_props_name_and_type()
+        self.get_data_props_min_and_max()
         self.convert_color_by_options()
         self.convert_size_by_options()
-        self.include_data_props_name_and_type()
 
 
 class Arcs(ArcsNodesGeosSerializer):
@@ -70,14 +83,15 @@ class Geos(ArcsNodesGeosSerializer):
     additional_keys = frozenset(["geoJsons"])
 
     def perform(self):
-        self.convert_color_by_options()
         self.include_data_props_name_and_type()
+        self.get_data_props_min_and_max()
+        self.convert_color_by_options()
 
+        # move urls under 'geoJsons' into 'geos' types
         for geo_entry in self.json["types"].values():
             geo_json_layer = geo_entry["geoJson"]["geoJsonLayer"]
-            geo_entry["geoJson"]["geoJsonLayer"] = self.additional_data["geoJsons"][
-                "data"
-            ][geo_json_layer]
+            geo_json_url = self.additional_data["geoJsons"]["data"][geo_json_layer]
+            geo_entry["geoJson"]["geoJsonLayer"] = geo_json_url
 
 
 class Kpis(TopLevelKeySerializer):
