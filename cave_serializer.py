@@ -5,9 +5,9 @@ class Serializer:
     def __init__(self, session_data):
         self.session_data = session_data
         self.key_serializers = [
-            key_serializer(session_data[key])
-            for key, key_serializer in TOP_LEVEL_KEY_SERIALIZERS.items()
-            if key in session_data
+            key_serializer(session_data)
+            for key_serializer in TOP_LEVEL_KEY_SERIALIZERS
+            if key_serializer.primary_key in session_data
         ]
 
     def include_required_top_level_keys(self):

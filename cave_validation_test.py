@@ -1084,8 +1084,8 @@ if __name__ == "__main__":
     serializer = Serializer(session_data)
     serialized_data = serializer.perform()
 
-    x = Validator(serialized_data)
-    x.log.print_logs(level="error")
+    validator = Validator(serialized_data)
+    validator.log.print_logs(level="error")
 
     with open("result.json", "w") as fp:
         json.dump(serialized_data, fp, indent=4)
