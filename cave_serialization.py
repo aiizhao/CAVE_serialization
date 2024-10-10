@@ -1,4 +1,4 @@
-from cave_serializer_helpers import *
+from cave_serialization_helpers import *
 
 
 class Serializer:
@@ -19,4 +19,19 @@ class Serializer:
         self.include_required_top_level_keys()
         for key_serializer in self.key_serializers:
             key_serializer.perform()
+        return self.session_data
+
+
+class Deserializer:
+    def __init__(self, session_data):
+        self.session_data = session_data
+        self.key_deserializers = [
+            key_deserializer(session_data)
+            for key_deserializer in TOP_LEVEL_KEY_DESERIALIZERS
+            if key_deserializer.primary_key in session_data
+        ]
+
+    def perform(self):
+        for key_deserializer in self.key_deserializers:
+            key_deserializer.perform()
         return self.session_data

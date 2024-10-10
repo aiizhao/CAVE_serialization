@@ -1,4 +1,13 @@
-from cave_serializer_utils import *
+def infer_prop_type(prop_entry):
+    if "value" not in prop_entry:
+        return "head"
+    elif isinstance(prop_entry["value"], str):
+        return "text"
+    elif isinstance(prop_entry["value"], bool):
+        return "toggle"
+    elif isinstance(prop_entry["value"], dict):
+        return "selector"
+    return "num"
 
 
 class TopLevelKeySerializer:
@@ -45,14 +54,12 @@ class ArcsNodesGeosSerializer(TopLevelKeySerializer):
         for type_entry in self.json["types"].values():
             color_by_options = type_entry["colorByOptions"]
             if isinstance(color_by_options, list):
-                start_gradient_color = type_entry.pop("startGradientColor")
-                end_gradient_color = type_entry.pop("endGradientColor")
                 type_entry["colorByOptions"] = {
                     prop: {
                         "min": self.props_min_values[prop],
                         "max": self.props_max_values[prop],
-                        "startGradientColor": start_gradient_color,
-                        "endGradientColor": end_gradient_color,
+                        "startGradientColor": type_entry["startGradientColor"],
+                        "endGradientColor": type_entry["endGradientColor"],
                     }
                     for prop in color_by_options
                 }
@@ -134,4 +141,51 @@ TOP_LEVEL_KEY_SERIALIZERS = [
     Kpis,
     Panes,
     Settings,
+]
+
+
+class ArcsNodesGeosDeserializer(TopLevelKeySerializer):
+    def convert_color_by_options(self):
+        for type_entry in self.json["types"].values():
+            type_entry["colorByOptions"] = list(type_entry["colorByOptions"].keys())
+
+    def convert_size_by_options(self):
+        for type_entry in self.json["types"].values():
+            type_entry["sizeByOptions"] = list(type_entry["sizeByOptions"].keys())
+
+    def perform(self):
+        self.convert_color_by_options()
+        self.convert_size_by_options()
+
+
+class Arcs(ArcsNodesGeosDeserializer):
+    primary_key = "arcs"
+
+
+class Nodes(ArcsNodesGeosDeserializer):
+    primary_key = "nodes"
+
+
+class Geos(ArcsNodesGeosDeserializer):
+    primary_key = "geos"
+    additional_keys = frozenset(["geoJsons"])
+
+    def perform(self):
+        self.convert_color_by_options()
+
+        # revert 'geoJsonLayer' values to layer names instead of urls
+        for geo_entry in self.json["types"].values():
+            geo_json_url = geo_entry["geoJson"]["geoJsonLayer"]
+            for layer_key, layer_value in self.additional_data["geoJsons"][
+                "data"
+            ].items():
+                if layer_value == geo_json_url:
+                    geo_entry["geoJson"]["geoJsonLayer"] = layer_key
+                    break
+
+
+TOP_LEVEL_KEY_DESERIALIZERS = [
+    Arcs,
+    Nodes,
+    Geos,
 ]

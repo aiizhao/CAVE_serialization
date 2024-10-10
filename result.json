@@ -1,0 +1,1422 @@
+{
+    "settings": {
+        "allow_modification": false,
+        "send_to_api": false,
+        "send_to_client": true,
+        "data": {
+            "IconUrl": "https://react-icons.mitcave.com/0.0.1",
+            "debug": true,
+            "iconUrl": "https://react-icons.mitcave.com/0.0.1"
+        }
+    },
+    "geoJsons": {
+        "allow_modification": false,
+        "send_to_api": false,
+        "send_to_client": true,
+        "data": {
+            "StateGeoJson": "https://geojsons.mitcave.com/world/world-states-provinces-md.json",
+            "CountryGeoJson": "https://geojsons.mitcave.com/world/countries-sm.json"
+        }
+    },
+    "categories": {
+        "allow_modification": false,
+        "data": {
+            "Location": {
+                "data": {
+                    "loc_US_MI": {
+                        "Region": "North America",
+                        "Country": "USA",
+                        "State": "Michigan"
+                    },
+                    "loc_US_MA": {
+                        "Region": "North America",
+                        "Country": "USA",
+                        "State": "Massachusetts"
+                    },
+                    "loc_US_FL": {
+                        "Region": "North America",
+                        "Country": "USA",
+                        "State": "Florida"
+                    },
+                    "loc_US_IN": {
+                        "Region": "North America",
+                        "Country": "USA",
+                        "State": "Indiana"
+                    },
+                    "loc_CA_ON": {
+                        "Region": "North America",
+                        "Country": "Canada",
+                        "State": "Ontario"
+                    }
+                },
+                "name": "Locations",
+                "nestedStructure": {
+                    "Region": {
+                        "name": "Regions",
+                        "order": 1
+                    },
+                    "Country": {
+                        "name": "Countries",
+                        "ordering": [
+                            "USA",
+                            "Canada"
+                        ],
+                        "order": 2
+                    },
+                    "State": {
+                        "name": "States",
+                        "order": 3
+                    }
+                },
+                "layoutDirection": "horizontal",
+                "order": 0
+            },
+            "Product": {
+                "data": {
+                    "prd_abc123": {
+                        "Type": "Fruit",
+                        "Size": "Big",
+                        "Product": "Apple"
+                    },
+                    "prd_def456": {
+                        "Type": "Fruit",
+                        "Size": "Small",
+                        "Product": "Grape"
+                    }
+                },
+                "name": "Products",
+                "nestedStructure": {
+                    "Type": {
+                        "name": "Types",
+                        "order": 1
+                    },
+                    "Size": {
+                        "name": "Sizing",
+                        "ordering": [
+                            "Small",
+                            "Big"
+                        ],
+                        "order": 2
+                    },
+                    "Product": {
+                        "name": "Products",
+                        "order": 3
+                    }
+                },
+                "layoutDirection": "horizontal",
+                "order": 1
+            }
+        }
+    },
+    "panes": {
+        "data": {
+            "settings": {
+                "name": "Settings Pane",
+                "props": {
+                    "Solver": {
+                        "name": "Solver",
+                        "type": "selector",
+                        "variant": "dropdown",
+                        "value": {
+                            "Gurobi": true,
+                            "Cplex": false,
+                            "CoinOR": false
+                        },
+                        "enabled": true,
+                        "help": "Select a solver type to use",
+                        "reinit": true,
+                        "order": 1
+                    },
+                    "optimality_section": {
+                        "name": "Optimality Section",
+                        "type": "head",
+                        "help": "Some help for the optimality section",
+                        "order": 2
+                    },
+                    "Pct_Optimal": {
+                        "name": "Percent Optimal",
+                        "type": "num",
+                        "value": 97,
+                        "enabled": true,
+                        "help": "What percent of optimal would you like to sove to?",
+                        "maxValue": 100,
+                        "minValue": 0,
+                        "order": 3
+                    }
+                },
+                "icon": "BsWrench",
+                "color": {
+                    "dark": "rgb(64, 179, 54)",
+                    "light": "rgb(24, 73, 20)"
+                },
+                "type": "options",
+                "change": "manual",
+                "teamSync": true,
+                "order": 1
+            },
+            "settingsBig": {
+                "name": "Settings Big Pane",
+                "props": {
+                    "solver_section": {
+                        "name": "Solver Section",
+                        "type": "head",
+                        "help": "Some help for the solver section",
+                        "order": 1,
+                        "column": 1
+                    },
+                    "Solver": {
+                        "name": "Solver",
+                        "type": "selector",
+                        "variant": "dropdown",
+                        "value": {
+                            "Gurobi": true,
+                            "Cplex": false,
+                            "CoinOR": false
+                        },
+                        "enabled": true,
+                        "help": "Select a solver type to use",
+                        "reinit": true,
+                        "order": 2,
+                        "column": 1
+                    },
+                    "optimality_section": {
+                        "name": "Optimality Section",
+                        "type": "head",
+                        "help": "Some help for the optimality section",
+                        "order": 1,
+                        "column": 2
+                    },
+                    "Pct_Optimal": {
+                        "name": "Percent Optimal",
+                        "type": "num",
+                        "value": 97,
+                        "enabled": true,
+                        "variant": "slider",
+                        "help": "What percent of optimal would you like to sove to?",
+                        "maxValue": 100,
+                        "minValue": 0,
+                        "order": 2,
+                        "column": 2
+                    },
+                    "distance_section": {
+                        "name": "Demand Served At Distances",
+                        "type": "head",
+                        "help": "How much demand do you expect to serve at the following distances?",
+                        "order": 1,
+                        "column": 3
+                    },
+                    "50_miles": {
+                        "name": "50 Miles",
+                        "type": "num",
+                        "value": 45,
+                        "enabled": true,
+                        "variant": "slider-condensed",
+                        "help": "Expected demand filled at 50 miles",
+                        "maxValue": 100,
+                        "minValue": 0,
+                        "order": 2,
+                        "column": 3
+                    },
+                    "100_miles": {
+                        "name": "100 Miles",
+                        "type": "num",
+                        "value": 35,
+                        "enabled": true,
+                        "variant": "slider-condensed",
+                        "help": "Expected demand filled at 100 miles",
+                        "maxValue": 100,
+                        "minValue": 0,
+                        "order": 3,
+                        "column": 3
+                    },
+                    "150_miles": {
+                        "name": "150 Miles",
+                        "type": "num",
+                        "value": 25,
+                        "enabled": true,
+                        "variant": "slider-condensed",
+                        "help": "Expected demand filled at 150 miles",
+                        "maxValue": 100,
+                        "minValue": 0,
+                        "order": 4,
+                        "column": 3
+                    }
+                },
+                "icon": "BsWrench",
+                "color": {
+                    "dark": "rgb(46, 244, 208)",
+                    "light": "rgb(17, 79, 68)"
+                },
+                "type": "optionsFull",
+                "change": "automatic",
+                "order": 2
+            },
+            "options": {
+                "name": "Options Pane",
+                "props": {
+                    "Combine_Materials": {
+                        "type": "selector",
+                        "value": {
+                            "True": true,
+                            "False": false
+                        },
+                        "enabled": true,
+                        "help": "Do you want to combine materials and treat them equally when solving?",
+                        "variant": "radio",
+                        "order": 2
+                    },
+                    "Meet_Monthly_Demand": {
+                        "type": "selector",
+                        "value": {
+                            "True": true,
+                            "False": false
+                        },
+                        "enabled": true,
+                        "help": "Do you want to force the solver to meet the monthly demand thresholds?",
+                        "variant": "radio",
+                        "order": 3
+                    }
+                },
+                "icon": "MdSettings",
+                "type": "options",
+                "change": "automatic",
+                "order": 1
+            },
+            "context": {
+                "props": {
+                    "Demand_Multiplier": {
+                        "type": "num",
+                        "value": 100,
+                        "enabled": true,
+                        "help": "Percentage multiplier times the base demand (100%=Given Demand)",
+                        "label": "%",
+                        "variant": "slider",
+                        "maxValue": 500,
+                        "minValue": 0,
+                        "selectableCategories": [
+                            "Location",
+                            "Product"
+                        ]
+                    },
+                    "Supply_Multiplier": {
+                        "type": "num",
+                        "value": 100,
+                        "enabled": true,
+                        "help": "Percentage multiplier times the base supply (100%=Given Supply)",
+                        "label": "%",
+                        "minValue": 0,
+                        "constraint": "int",
+                        "selectableCategories": [
+                            "Location",
+                            "Product"
+                        ]
+                    }
+                },
+                "data": {
+                    "context_1": {
+                        "prop": "Demand_Multiplier",
+                        "value": 110,
+                        "applyCategories": {
+                            "Location": [
+                                "loc_US_MI"
+                            ]
+                        }
+                    }
+                },
+                "icon": "BsInboxes",
+                "type": "context",
+                "change": "automatic",
+                "order": 4,
+                "name": "context Pane"
+            }
+        }
+    },
+    "arcs": {
+        "name": "Arcs",
+        "types": {
+            "T1": {
+                "name": "Flow Type 1",
+                "colorByOptions": {
+                    "Flow Capacity": {
+                        "min": 30,
+                        "max": 50,
+                        "startGradientColor": {
+                            "dark": "rgb(233, 0, 0)",
+                            "light": "rgb(52, 52, 236)"
+                        },
+                        "endGradientColor": {
+                            "dark": "rgb(96, 2, 2)",
+                            "light": "rgb(23, 23, 126)"
+                        }
+                    },
+                    "Flow": {
+                        "min": 6,
+                        "max": 40,
+                        "startGradientColor": {
+                            "dark": "rgb(233, 0, 0)",
+                            "light": "rgb(52, 52, 236)"
+                        },
+                        "endGradientColor": {
+                            "dark": "rgb(96, 2, 2)",
+                            "light": "rgb(23, 23, 126)"
+                        }
+                    }
+                },
+                "colorBy": "Flow",
+                "startGradientColor": {
+                    "dark": "rgb(233, 0, 0)",
+                    "light": "rgb(52, 52, 236)"
+                },
+                "endGradientColor": {
+                    "dark": "rgb(96, 2, 2)",
+                    "light": "rgb(23, 23, 126)"
+                },
+                "lineBy": "solid",
+                "sizeByOptions": {
+                    "Flow Capacity": {
+                        "min": 30,
+                        "max": 50
+                    },
+                    "Flow": {
+                        "min": 6,
+                        "max": 40
+                    }
+                },
+                "sizeBy": "Flow Capacity",
+                "startSize": "15px",
+                "endSize": "30px",
+                "order": 0
+            },
+            "T2": {
+                "name": "Flow Type 2",
+                "colorByOptions": {
+                    "Flow Capacity": {
+                        "min": 30,
+                        "max": 50,
+                        "startGradientColor": {
+                            "dark": "rgb(233, 0, 0)",
+                            "light": "rgb(52, 52, 236)"
+                        },
+                        "endGradientColor": {
+                            "dark": "rgb(96, 2, 2)",
+                            "light": "rgb(23, 23, 126)"
+                        }
+                    },
+                    "Flow": {
+                        "min": 6,
+                        "max": 40,
+                        "startGradientColor": {
+                            "dark": "rgb(233, 0, 0)",
+                            "light": "rgb(52, 52, 236)"
+                        },
+                        "endGradientColor": {
+                            "dark": "rgb(96, 2, 2)",
+                            "light": "rgb(23, 23, 126)"
+                        }
+                    }
+                },
+                "colorBy": "Flow",
+                "startGradientColor": {
+                    "dark": "rgb(233, 0, 0)",
+                    "light": "rgb(52, 52, 236)"
+                },
+                "endGradientColor": {
+                    "dark": "rgb(96, 2, 2)",
+                    "light": "rgb(23, 23, 126)"
+                },
+                "lineBy": "dotted",
+                "sizeByOptions": {
+                    "Flow Capacity": {
+                        "min": 30,
+                        "max": 50
+                    },
+                    "Flow": {
+                        "min": 6,
+                        "max": 40
+                    }
+                },
+                "sizeBy": "Flow Capacity",
+                "startSize": "15px",
+                "endSize": "30px",
+                "order": 1
+            }
+        },
+        "propDefaults": {
+            "Flow Capacity": {
+                "name": "Flow Capacity (test)",
+                "type": "num",
+                "enabled": false,
+                "help": "Flow Capacity",
+                "order": 1,
+                "unit": "units (test)"
+            }
+        },
+        "data": {
+            "arc_1": {
+                "startLatitude": 43.78,
+                "startLongitude": -79.63,
+                "endLatitude": 39.82,
+                "endLongitude": -86.18,
+                "startClick": 800,
+                "endClick": 1600,
+                "type": "T1",
+                "category": {
+                    "Location": [
+                        "loc_CA_ON",
+                        "loc_US_IN"
+                    ],
+                    "Product": [
+                        "prd_def456",
+                        "prd_abc123"
+                    ]
+                },
+                "props": {
+                    "Flow Capacity": {
+                        "value": 50,
+                        "name": "Flow Capacity",
+                        "type": "num"
+                    },
+                    "Flow": {
+                        "name": "Flow (test)",
+                        "type": "num",
+                        "value": 40,
+                        "enabled": false,
+                        "help": "Flow",
+                        "order": 2,
+                        "unit": "units (test)"
+                    }
+                }
+            },
+            "arc_2": {
+                "startLatitude": 39.82,
+                "startLongitude": -86.18,
+                "endLatitude": 42.89,
+                "endLongitude": -85.68,
+                "startClick": 1600,
+                "endClick": 2000,
+                "type": "T2",
+                "category": {
+                    "Location": [
+                        "loc_US_MI",
+                        "loc_US_IN"
+                    ],
+                    "Product": [
+                        "prd_def456",
+                        "prd_abc123"
+                    ]
+                },
+                "props": {
+                    "Flow Capacity": {
+                        "value": 30,
+                        "name": "Flow Capacity",
+                        "type": "num"
+                    },
+                    "Flow": {
+                        "type": "num",
+                        "value": 20,
+                        "enabled": false,
+                        "help": "Flow",
+                        "order": 2,
+                        "name": "Flow"
+                    }
+                }
+            },
+            "arc_3": {
+                "startLatitude": 39.82,
+                "startLongitude": -86.18,
+                "endLatitude": 28.49,
+                "endLongitude": -81.56,
+                "startClick": 1600,
+                "endClick": 2000,
+                "type": "T2",
+                "category": {
+                    "Location": [
+                        "loc_US_FL",
+                        "loc_US_IN"
+                    ],
+                    "Product": [
+                        "prd_def456",
+                        "prd_abc123"
+                    ]
+                },
+                "props": {
+                    "Flow Capacity": {
+                        "value": 30,
+                        "name": "Flow Capacity",
+                        "type": "num"
+                    },
+                    "Flow": {
+                        "type": "num",
+                        "value": 14,
+                        "enabled": false,
+                        "help": "Flow",
+                        "order": 2,
+                        "name": "Flow"
+                    }
+                }
+            },
+            "arc_4": {
+                "startLatitude": 39.82,
+                "startLongitude": -86.18,
+                "endLatitude": 42.361176,
+                "endLongitude": -71.084707,
+                "startClick": 1600,
+                "endClick": 2000,
+                "type": "T2",
+                "category": {
+                    "Location": [
+                        "loc_US_MA",
+                        "loc_US_IN"
+                    ],
+                    "Product": [
+                        "prd_def456",
+                        "prd_abc123"
+                    ]
+                },
+                "props": {
+                    "Flow Capacity": {
+                        "type": "num",
+                        "value": 30,
+                        "enabled": false,
+                        "help": "Flow Capacity",
+                        "order": 1,
+                        "name": "Flow Capacity"
+                    },
+                    "Flow": {
+                        "type": "num",
+                        "value": 6,
+                        "enabled": false,
+                        "help": "Flow",
+                        "order": 2,
+                        "name": "Flow"
+                    }
+                }
+            }
+        }
+    },
+    "nodes": {
+        "name": "Nodes",
+        "types": {
+            "DC": {
+                "name": "DCs",
+                "colorByOptions": {
+                    "Size": {
+                        "min": 80,
+                        "max": 1000,
+                        "startGradientColor": {
+                            "dark": "rgb(233, 0, 0)",
+                            "light": "rgb(52, 52, 236)"
+                        },
+                        "endGradientColor": {
+                            "dark": "rgb(96, 2, 2)",
+                            "light": "rgb(23, 23, 126)"
+                        }
+                    },
+                    "Capacity": {
+                        "min": 40,
+                        "max": 250,
+                        "startGradientColor": {
+                            "dark": "rgb(233, 0, 0)",
+                            "light": "rgb(52, 52, 236)"
+                        },
+                        "endGradientColor": {
+                            "dark": "rgb(96, 2, 2)",
+                            "light": "rgb(23, 23, 126)"
+                        }
+                    }
+                },
+                "colorBy": "Size",
+                "minColorRange": 0,
+                "startGradientColor": {
+                    "dark": "rgb(233, 0, 0)",
+                    "light": "rgb(52, 52, 236)"
+                },
+                "endGradientColor": {
+                    "dark": "rgb(96, 2, 2)",
+                    "light": "rgb(23, 23, 126)"
+                },
+                "minSizeRange": 0,
+                "sizeByOptions": {
+                    "Size": {
+                        "min": 80,
+                        "max": 1000
+                    },
+                    "Capacity": {
+                        "min": 40,
+                        "max": 250
+                    }
+                },
+                "sizeBy": "Capacity",
+                "startSize": "30px",
+                "endSize": "45px",
+                "icon": "MdStore",
+                "checkXBy": "Active",
+                "order": 1
+            },
+            "Store": {
+                "name": "Stores",
+                "colorByOptions": {
+                    "Size": {
+                        "min": 80,
+                        "max": 1000,
+                        "startGradientColor": {
+                            "dark": "rgb(233, 0, 0)",
+                            "light": "rgb(52, 52, 236)"
+                        },
+                        "endGradientColor": {
+                            "dark": "rgb(96, 2, 2)",
+                            "light": "rgb(23, 23, 126)"
+                        }
+                    },
+                    "Capacity": {
+                        "min": 40,
+                        "max": 250,
+                        "startGradientColor": {
+                            "dark": "rgb(233, 0, 0)",
+                            "light": "rgb(52, 52, 236)"
+                        },
+                        "endGradientColor": {
+                            "dark": "rgb(96, 2, 2)",
+                            "light": "rgb(23, 23, 126)"
+                        }
+                    }
+                },
+                "colorBy": "Size",
+                "startGradientColor": {
+                    "dark": "rgb(233, 0, 0)",
+                    "light": "rgb(52, 52, 236)"
+                },
+                "endGradientColor": {
+                    "dark": "rgb(96, 2, 2)",
+                    "light": "rgb(23, 23, 126)"
+                },
+                "sizeByOptions": {
+                    "Size": {
+                        "min": 80,
+                        "max": 1000
+                    },
+                    "Capacity": {
+                        "min": 40,
+                        "max": 250
+                    }
+                },
+                "sizeBy": "Capacity",
+                "startSize": "30px",
+                "endSize": "45px",
+                "icon": "BsBuilding",
+                "checkXBy": "Active",
+                "order": 0
+            }
+        },
+        "propDefaults": {
+            "Size": {
+                "type": "num",
+                "enabled": true,
+                "help": "The Size in SQ Meters",
+                "unit": "Sq Meters",
+                "column": 2
+            }
+        },
+        "data": {
+            "node_1": {
+                "latitude": 43.78,
+                "longitude": -79.63,
+                "type": "DC",
+                "category": {
+                    "Location": [
+                        "loc_CA_ON"
+                    ],
+                    "Product": [
+                        "prd_def456",
+                        "prd_abc123"
+                    ]
+                },
+                "props": {
+                    "Size": {
+                        "value": 100,
+                        "name": "Size",
+                        "type": "num"
+                    },
+                    "Capacity": {
+                        "type": "num",
+                        "value": 50,
+                        "enabled": false,
+                        "help": "The capacity in units",
+                        "name": "Capacity"
+                    },
+                    "Active": {
+                        "type": "toggle",
+                        "value": true,
+                        "enabled": true,
+                        "help": "The active status of this location",
+                        "name": "Active"
+                    }
+                }
+            },
+            "node_2": {
+                "latitude": 39.82,
+                "longitude": -86.18,
+                "type": "DC",
+                "category": {
+                    "Location": [
+                        "loc_US_IN"
+                    ],
+                    "Product": [
+                        "prd_def456",
+                        "prd_abc123"
+                    ]
+                },
+                "props": {
+                    "Size": {
+                        "value": 80,
+                        "name": "Size",
+                        "type": "num"
+                    },
+                    "Capacity": {
+                        "type": "num",
+                        "value": 40,
+                        "enabled": false,
+                        "help": "The capacity in units",
+                        "name": "Capacity"
+                    },
+                    "Active": {
+                        "type": "toggle",
+                        "value": true,
+                        "enabled": false,
+                        "help": "The active status of this location",
+                        "name": "Active"
+                    }
+                }
+            },
+            "node_3": {
+                "latitude": 42.89,
+                "longitude": -85.68,
+                "type": "Store",
+                "category": {
+                    "Location": [
+                        "loc_US_MI"
+                    ],
+                    "Product": [
+                        "prd_def456",
+                        "prd_abc123"
+                    ]
+                },
+                "props": {
+                    "Size": {
+                        "value": 1000,
+                        "name": "Size",
+                        "type": "num"
+                    },
+                    "Capacity": {
+                        "type": "num",
+                        "value": 250,
+                        "enabled": false,
+                        "help": "The capacity in units",
+                        "name": "Capacity"
+                    },
+                    "Active": {
+                        "type": "toggle",
+                        "value": true,
+                        "enabled": false,
+                        "help": "The active status of this location",
+                        "name": "Active"
+                    }
+                }
+            },
+            "node_4": {
+                "latitude": 28.49,
+                "longitude": -81.56,
+                "type": "Store",
+                "category": {
+                    "Location": [
+                        "loc_US_FL"
+                    ],
+                    "Product": [
+                        "prd_def456",
+                        "prd_abc123"
+                    ]
+                },
+                "props": {
+                    "Size": {
+                        "value": 1000,
+                        "name": "Size",
+                        "type": "num"
+                    },
+                    "Capacity": {
+                        "type": "num",
+                        "value": 250,
+                        "enabled": false,
+                        "help": "The capacity in units",
+                        "name": "Capacity"
+                    },
+                    "Active": {
+                        "type": "toggle",
+                        "value": true,
+                        "enabled": false,
+                        "help": "The active status of this location",
+                        "name": "Active"
+                    }
+                }
+            },
+            "node_5": {
+                "latitude": 42.361176,
+                "longitude": -71.084707,
+                "type": "Store",
+                "category": {
+                    "Location": [
+                        "loc_US_MA"
+                    ],
+                    "Product": [
+                        "prd_def456",
+                        "prd_abc123"
+                    ]
+                },
+                "props": {
+                    "Size": {
+                        "value": 1000,
+                        "name": "Size",
+                        "type": "num"
+                    },
+                    "Capacity": {
+                        "type": "num",
+                        "value": 250,
+                        "enabled": false,
+                        "help": "The capacity in units",
+                        "name": "Capacity"
+                    },
+                    "Active": {
+                        "type": "toggle",
+                        "value": true,
+                        "enabled": false,
+                        "help": "The active status of this location",
+                        "name": "Active"
+                    }
+                }
+            }
+        }
+    },
+    "geos": {
+        "name": "Geographies",
+        "types": {
+            "state": {
+                "name": "State",
+                "colorByOptions": {
+                    "Demand": {
+                        "min": 50,
+                        "max": 800,
+                        "startGradientColor": {
+                            "dark": "rgb(100, 100, 100)",
+                            "light": "rgb(200, 200, 200)"
+                        },
+                        "endGradientColor": {
+                            "dark": "rgb(20, 205, 20)",
+                            "light": "rgb(10, 100, 10)"
+                        }
+                    }
+                },
+                "colorBy": "Demand",
+                "geoJson": {
+                    "geoJsonLayer": "https://geojsons.mitcave.com/world/world-states-provinces-md.json",
+                    "geoJsonProp": "code_hasc"
+                },
+                "startGradientColor": {
+                    "dark": "rgb(100, 100, 100)",
+                    "light": "rgb(200, 200, 200)"
+                },
+                "endGradientColor": {
+                    "dark": "rgb(20, 205, 20)",
+                    "light": "rgb(10, 100, 10)"
+                },
+                "icon": "BsHexagon"
+            },
+            "country": {
+                "name": "Country",
+                "colorByOptions": {
+                    "Demand": {
+                        "min": 50,
+                        "max": 800,
+                        "startGradientColor": {
+                            "dark": "rgb(100, 100, 100)",
+                            "light": "rgb(200, 200, 200)"
+                        },
+                        "endGradientColor": {
+                            "dark": "rgb(20, 205, 20)",
+                            "light": "rgb(10, 100, 10)"
+                        }
+                    }
+                },
+                "colorBy": "Demand",
+                "geoJson": {
+                    "geoJsonLayer": "https://geojsons.mitcave.com/world/countries-sm.json",
+                    "geoJsonProp": "FIPS_10"
+                },
+                "startGradientColor": {
+                    "dark": "rgb(100, 100, 100)",
+                    "light": "rgb(200, 200, 200)"
+                },
+                "endGradientColor": {
+                    "dark": "rgb(20, 205, 20)",
+                    "light": "rgb(10, 100, 10)"
+                },
+                "icon": "BsHexagon"
+            }
+        },
+        "propDefaults": {
+            "Demand": {
+                "type": "num",
+                "enabled": true,
+                "help": "The Demand of this Geography",
+                "unit": "Units"
+            }
+        },
+        "data": {
+            "geo_1": {
+                "name": "Ontario, Canada",
+                "geoJsonValue": "CA.ON",
+                "type": "state",
+                "category": {
+                    "Location": [
+                        "loc_CA_ON"
+                    ]
+                },
+                "props": {
+                    "Demand": {
+                        "value": 50,
+                        "name": "Demand",
+                        "type": "num"
+                    }
+                }
+            },
+            "geo_2": {
+                "name": "Michigan, USA",
+                "geoJsonValue": "US.MI",
+                "type": "state",
+                "category": {
+                    "Location": [
+                        "loc_US_MI"
+                    ]
+                },
+                "props": {
+                    "Demand": {
+                        "value": 300,
+                        "name": "Demand",
+                        "type": "num"
+                    }
+                }
+            },
+            "geo_3": {
+                "name": "Massachusetts, USA",
+                "geoJsonValue": "US.MA",
+                "type": "state",
+                "category": {
+                    "Location": [
+                        "loc_US_MI"
+                    ]
+                },
+                "props": {
+                    "Demand": {
+                        "value": 250,
+                        "name": "Demand",
+                        "type": "num"
+                    }
+                }
+            },
+            "geo_4": {
+                "name": "Florida, USA",
+                "geoJsonValue": "US.FL",
+                "type": "state",
+                "category": {
+                    "Location": [
+                        "loc_US_MI"
+                    ]
+                },
+                "props": {
+                    "Demand": {
+                        "value": 100,
+                        "name": "Demand",
+                        "type": "num"
+                    }
+                }
+            },
+            "geo_5": {
+                "name": "Indiana, USA",
+                "geoJsonValue": "US.FL",
+                "type": "state",
+                "category": {
+                    "Location": [
+                        "loc_US_MI"
+                    ]
+                },
+                "props": {
+                    "Demand": {
+                        "value": 200,
+                        "name": "Demand",
+                        "type": "num"
+                    }
+                }
+            },
+            "geo_c_1": {
+                "name": "Canada",
+                "geoJsonValue": "CA",
+                "type": "country",
+                "category": {
+                    "Location": [
+                        "loc_CA_ON"
+                    ]
+                },
+                "props": {
+                    "Demand": {
+                        "value": 50,
+                        "name": "Demand",
+                        "type": "num"
+                    }
+                }
+            },
+            "geo_c_2": {
+                "name": "USA",
+                "geoJsonValue": "US",
+                "type": "country",
+                "category": {
+                    "Location": [
+                        "loc_US_FL",
+                        "loc_US_MA",
+                        "loc_US_IN",
+                        "loc_US_MI"
+                    ]
+                },
+                "props": {
+                    "Demand": {
+                        "value": 800,
+                        "name": "Demand",
+                        "type": "num"
+                    }
+                }
+            }
+        }
+    },
+    "stats": {
+        "name": "Statistics",
+        "types": {
+            "demand_met": {
+                "name": "Demand Met",
+                "calculation": "demand_met",
+                "unit": "units",
+                "order": 1
+            },
+            "demand_tot": {
+                "name": "Demand Total",
+                "calculation": "demand_tot",
+                "unit": "units",
+                "order": 2
+            },
+            "demand_pct": {
+                "name": "Demand Percentage",
+                "calculation": "demand_met / demand_tot",
+                "unit": "%",
+                "order": 3
+            }
+        },
+        "data": {
+            "d1": {
+                "category": {
+                    "Location": [
+                        "loc_CA_ON"
+                    ],
+                    "Product": [
+                        "prd_abc123"
+                    ]
+                },
+                "values": {
+                    "demand_met": 5,
+                    "demand_tot": 10
+                }
+            },
+            "d2": {
+                "category": {
+                    "Location": [
+                        "loc_CA_ON"
+                    ],
+                    "Product": [
+                        "prd_def456"
+                    ]
+                },
+                "values": {
+                    "demand_met": 4,
+                    "demand_tot": 5
+                }
+            },
+            "d3": {
+                "category": {
+                    "Location": [
+                        "loc_US_MI"
+                    ],
+                    "Product": [
+                        "prd_abc123"
+                    ]
+                },
+                "values": {
+                    "demand_met": 6,
+                    "demand_tot": 7
+                }
+            },
+            "d4": {
+                "category": {
+                    "Location": [
+                        "loc_US_MI"
+                    ],
+                    "Product": [
+                        "prd_def456"
+                    ]
+                },
+                "values": {
+                    "demand_met": 3,
+                    "demand_tot": 5
+                }
+            }
+        }
+    },
+    "keys": {
+        "data": {
+            "key_1": {
+                "name": "Global Demand Met",
+                "unit": "units",
+                "value": 18,
+                "icon": "BsInboxes",
+                "order": 1
+            },
+            "key_2": {
+                "name": "Customer Happiness",
+                "unit": "smiles",
+                "value": 16,
+                "icon": "BsFillEmojiSmileFill",
+                "order": 2
+            }
+        }
+    },
+    "kpis": {
+        "data": {
+            "demand_header": {
+                "name": "Demand Section",
+                "unit": "units",
+                "icon": "BsInboxes",
+                "order": 0,
+                "column": 1,
+                "type": "head"
+            },
+            "demand": {
+                "name": "Global Demand",
+                "unit": "units",
+                "icon": "BsInboxes",
+                "order": 1,
+                "column": 1,
+                "value": 100,
+                "sum": 100,
+                "max": 10,
+                "pct75": 7,
+                "med": 5,
+                "pct25": 3,
+                "min": 1,
+                "avg": 6
+            },
+            "supply_header": {
+                "name": "Supply Section",
+                "unit": "units",
+                "icon": "BsTruck",
+                "order": 0,
+                "column": 2,
+                "type": "head"
+            },
+            "big_number": {
+                "name": "Big Number",
+                "unit": "units",
+                "icon": "BsTruck",
+                "order": 1,
+                "column": 2,
+                "value": 10000000000000,
+                "sum": 100,
+                "max": 10,
+                "pct75": 7,
+                "med": 5,
+                "pct25": 3,
+                "min": 1,
+                "avg": 6
+            },
+            "supply": {
+                "name": "Really Big Number",
+                "unit": "units",
+                "icon": "BsTruck",
+                "order": 1,
+                "column": 2,
+                "value": 100000000000000000000000000,
+                "sum": 100,
+                "max": 10,
+                "pct75": 7,
+                "med": 5,
+                "pct25": 3,
+                "min": 1,
+                "avg": 6
+            }
+        }
+    },
+    "localDefaults": {
+        "allow_modification": false,
+        "data": {
+            "panes": {
+                "open": null,
+                "secondaryOpen": null,
+                "panes": {},
+                "filtered": {}
+            },
+            "map": {
+                "icon": "MdExplore",
+                "color": {
+                    "dark": "rgb(224, 224, 224)",
+                    "light": "rgb(32, 32, 32)"
+                },
+                "mapControls": {
+                    "viewport": {
+                        "longitude": -85,
+                        "latitude": 38,
+                        "zoom": 6,
+                        "pitch": 0,
+                        "bearing": 0,
+                        "height": 1983,
+                        "altitude": 1.5,
+                        "maxZoom": 12,
+                        "minZoom": 1.5
+                    },
+                    "optionalViewports": {
+                        "ov1": {
+                            "name": "Optional Viewport One",
+                            "icon": "FaGlobe",
+                            "order": 1,
+                            "longitude": -79,
+                            "latitude": 38,
+                            "zoom": 5,
+                            "minZoom": 0,
+                            "maxZoom": 12,
+                            "pitch": 0,
+                            "bearing": 0
+                        }
+                    }
+                },
+                "mapLayers": {
+                    "geography": {
+                        "stat": "Select Statistic",
+                        "type": "Select Type",
+                        "enabled": true
+                    },
+                    "enabledNodes": [],
+                    "enabledArcs": []
+                },
+                "mapLegend": {
+                    "isOpen": true
+                },
+                "order": 1
+            },
+            "dashboards": {
+                "data": {
+                    "dash_1": {
+                        "icon": "BsCircleFill",
+                        "name": "Dashboard 1",
+                        "type": "stats",
+                        "color": {
+                            "dark": "rgb(178, 179, 55)",
+                            "light": "rgb(79, 79, 24)"
+                        },
+                        "order": 1,
+                        "layout": [
+                            {
+                                "chart": "Bar",
+                                "grouping": "Average",
+                                "statistic": "demand_met"
+                            },
+                            {
+                                "chart": "Line",
+                                "grouping": "Sum",
+                                "statistic": "demand_pct"
+                            },
+                            {
+                                "chart": "Bar",
+                                "level": "Size",
+                                "category": "Product",
+                                "grouping": "Sum",
+                                "statistic": "demand_met"
+                            },
+                            {
+                                "chart": "Bar",
+                                "grouping": "Minimum",
+                                "type": "kpis",
+                                "sessions": [],
+                                "kpi": "Really Big Number"
+                            }
+                        ],
+                        "lockedLayout": false
+                    },
+                    "dash_2": {
+                        "icon": "BsSquareFill",
+                        "name": "Dashboard 2",
+                        "type": "kpis",
+                        "color": {
+                            "dark": "rgb(57, 201, 176)",
+                            "light": "rgb(22, 77, 67)"
+                        },
+                        "order": 2,
+                        "layout": [
+                            {
+                                "chart": "Bar",
+                                "grouping": "Average",
+                                "statistic": "demand_met",
+                                "category": null,
+                                "level": null
+                            },
+                            {
+                                "chart": "Line",
+                                "grouping": "Sum",
+                                "statistic": "demand_pct"
+                            },
+                            {
+                                "chart": "Bar",
+                                "level": "Size",
+                                "category": "Product",
+                                "grouping": "Sum",
+                                "statistic": "demand_met"
+                            },
+                            {
+                                "chart": "Bar",
+                                "level": "Size",
+                                "category": "Product",
+                                "grouping": "Average",
+                                "statistic": "demand_met"
+                            }
+                        ],
+                        "lockedLayout": false
+                    }
+                },
+                "dashboardId": "dash_1",
+                "order": 2
+            },
+            "kpi": {
+                "icon": "MdSpeed",
+                "color": {
+                    "dark": "rgb(224, 224, 224)",
+                    "light": "rgb(32, 32, 32)"
+                },
+                "order": 3
+            },
+            "settings": {
+                "theme": "dark",
+                "view": "map"
+            }
+        }
+    },
+    "appBar": {
+        "data": {}
+    },
+    "dashboards": {
+        "data": {}
+    },
+    "maps": {
+        "data": {}
+    }
+}

@@ -1,5 +1,5 @@
 from cave_utils.validator import Validator
-from cave_serializer import Serializer
+from cave_serialization import Serializer, Deserializer
 import json
 
 if __name__ == "__main__":
@@ -1084,7 +1084,13 @@ if __name__ == "__main__":
     serializer = Serializer(session_data)
     serialized_data = serializer.perform()
 
-    validator = Validator(serialized_data)
+    deserializer = Deserializer(serialized_data)
+    deserialized_data = deserializer.perform()
+
+    reserializer = Serializer(deserialized_data)
+    reserialized_data = reserializer.perform()
+
+    validator = Validator(reserialized_data)
     validator.log.print_logs(level="error")
 
     with open("result.json", "w") as fp:
